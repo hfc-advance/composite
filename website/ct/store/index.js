@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 import airTicketStore from '../modules/airTicket/store.js'
 //! 酒店
 import hotelStore from '../modules/hotel/store.js'
+import mouseStore from '../modules/mouse/store.js'/* @init<%import ${TplModuleName}Store from '../modules/${TplModuleName}/store.js'%> */
 
 Vue.use(Vuex)
 
@@ -34,7 +35,8 @@ export const store = new Vuex.Store({
     hotel: {
       namespaced: true,
       ...hotelStore
-    }
+    },
+    mouse: { namespaced: true, ...mouseStore },/* @init<%${TplModuleName}: { namespaced: true, ...${TplModuleName}Store },%> */
   }
 })
 

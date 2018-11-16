@@ -45,6 +45,7 @@
     "babel-plugin-transform-vue-jsx": "^3.7.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-stage-2": "^6.24.1",
+    "bluebird": "^3.5.3",
     "chalk": "^2.4.1",
     "commitizen": "^3.0.4",
     "css-loader": "^0.28.11",
