@@ -7,9 +7,8 @@ import airTicketRoutes from '../modules/airTicket/routes.js'
 //! ${TplModuleIntroduction}
 import ${TplModuleName}Routes from '../modules/${TplModuleName}/routes.js'%> */
 
-
 Vue.use(VueRouter)
-
+/* eslint-disable */
 export const router = new VueRouter({
   routes: [
     //! 机票
@@ -19,7 +18,7 @@ export const router = new VueRouter({
     ...${TplModuleName}Routes,%>*/
   ]
 })
-
+/* eslint-enable */
 //? 添加路由钩子
 routerHooks(router)
 

@@ -11,6 +11,7 @@ const bluebird = require('bluebird').promisifyAll(fs);
 
 //? path
 let getRoutesPath = (answers) => path.resolve(CWD, `./website/${answers.TplProjectName}/routes/index.js`);
+let getRouterHooksPath = (answers) => path.resolve(CWD, `./website/${answers.TplProjectName}/routes/hooks.js`);
 let getStorePath = (answers) => path.resolve(CWD, `./website/${answers.TplProjectName}/store/index.js`);
 
 function launch () {
@@ -92,7 +93,7 @@ function copyTem (answers) {
 
 //? 往主文件里面写东西
 function compiler (answers) {
-  return Promise.all([syncRoutes(answers), syncStore(answers)]).then(() => answers)
+  return Promise.all([syncRoutes(answers), syncRouterHooks(answers), syncStore(answers)]).then(() => answers)
 }
 
 //? 同步路由
@@ -103,6 +104,17 @@ function syncRoutes (answers) {
       return compile(answers, str)
     })
     .then(str => fs.writeFileAsync((routesPath), str, 'utf8'))
+    .then(() => answers)
+}
+
+//? 同步路由钩子
+function syncRouterHooks (answers) {
+  let routerHooksPath = getRouterHooksPath(answers);
+  bluebird.readFileAsync(routerHooksPath, 'utf8')
+    .then(str => {
+      return compile(answers, str)
+    })
+    .then(str => fs.writeFileAsync((routerHooksPath), str, 'utf8'))
     .then(() => answers)
 }
 
@@ -117,7 +129,7 @@ function syncStore (answers) {
     .then(() => answers)
 }
 function compile(answers, fileStr) {
-  return String.prototype.replace.call(fileStr, /\n\s*\/\*.*@init<%((.|\s)*?)%>.*\*\//g, function (match, p1) {
+  return String.prototype.replace.call(fileStr, /\n*\s*\/\*.*@init<%((.|\s)*?)%>.*\*\//g, function (match, p1) {
     return (String.prototype.replace.call(p1, /\${(\w*)}/g, function (innMatch, innP1) {
       return answers[innP1]
     })) + '\r' +match

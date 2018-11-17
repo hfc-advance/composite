@@ -19,7 +19,7 @@ const mutations = {
     state.pageChangeAnimation = name
   }
 }
-
+/* eslint-disable */
 export const store = new Vuex.Store({
   //? TODO:开启严格模式会深度监测状态树来检测不合规的状态变更，开发环境约束好，生产环境关闭掉
   strict: process.env.NODE_ENV !== 'production',
@@ -39,5 +39,5 @@ export const store = new Vuex.Store({
     },%> */
   }
 })
-
+/* eslint-enable */
 export default store

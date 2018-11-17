@@ -1,0 +1,7 @@
+{
+  /* 映射路径提示 */    
+  "path-autocomplete.pathMappings": {
+    "@": "${folder}/website",
+    "components": "${folder}/components"
+  }
+}
