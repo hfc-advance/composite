@@ -1,8 +1,8 @@
 //? 机票模块路由
 
 //! TODO: 路由例子
-let loadPageExample = () => import(/* webpackChunkName: "airTicket.pageTemplate" */'../../../../components/template/page/page.vue')
-let loadTest = () => import(/* webpackChunkName: "airTicket.test" */'./test.vue')
+let loadPageExample = () => import(/* webpackChunkName: "airTicket.pageTemplate" */'components/template/page/page.vue')
+let loadTest = () => import(/* webpackChunkName: "airTicket.test" */'../test.vue')
 export const routes = [
   {
     //! 模块/组件名字

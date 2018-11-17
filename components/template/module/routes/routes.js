@@ -1,7 +1,7 @@
 //? {{TplModuleIntroduction}}模块路由
 
 //! TODO: 路由例子
-let loadPageExample = () => import(/* webpackChunkName: "{{TplModuleName}}.pageTemplate" */'../../../../components/template/page/page.vue')
+let loadPageExample = () => import(/* webpackChunkName: "{{TplModuleName}}.pageTemplate" */'components/template/page/page.vue')
 export const routes = [
   {
     //! 模块/组件名字

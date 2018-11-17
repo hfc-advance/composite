@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import createStorePlugin from 'components/tools/storePlugin.js'
+import whiteList from './cacheWhiteList.js'
 //! 机票
-import airTicketStore from '../modules/airTicket/store.js'
+import airTicketStore from '../modules/airTicket/store/store.js'
 /* @init<%
 //! ${TplModuleIntroduction}
-import ${TplModuleName}Store from '../modules/${TplModuleName}/store.js'%> */
+import ${TplModuleName}Store from '../modules/${TplModuleName}/store/store.js'%> */
 
 Vue.use(Vuex)
 
@@ -19,6 +21,15 @@ const mutations = {
     state.pageChangeAnimation = name
   }
 }
+
+//? 添加缓存插件要用的mutations
+const cachePluginMutations = {}
+for (let key in state) {
+  cachePluginMutations[`_set_${key}`] = (originState, val) => {
+    originState[key] = val
+  }
+}
+
 /* eslint-disable */
 export const store = new Vuex.Store({
   //? TODO:开启严格模式会深度监测状态树来检测不合规的状态变更，开发环境约束好，生产环境关闭掉
@@ -37,7 +48,8 @@ export const store = new Vuex.Store({
       namespaced: true,
       ...${TplModuleName}Store
     },%> */
-  }
+  },
+  plugins: [createStorePlugin(whiteList)]
 })
 /* eslint-enable */
 export default store

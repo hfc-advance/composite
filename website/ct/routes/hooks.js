@@ -2,7 +2,7 @@ import { isFunction } from 'components/tools/utils.js'
 import store from '../store/index.js'
 /* @init<%
 //! ${TplModuleName}模块钩子
-import { entryBefore as ${TplModuleName}EntryBefore } from '../modules/${TplModuleName}/routerHooks.js'%> */
+import { entryBefore as ${TplModuleName}EntryBefore } from '../modules/${TplModuleName}/routes/routerHooks.js'%> */
 
 //? 存放钩子模型
 /* eslint-disable */
@@ -10,6 +10,7 @@ const hooksModel = {
   'test': '',
   /* @init<%${TplModuleName}EntryBefore,%>*/
 }
+/* eslint-enable */
 
 //? 页面切换动画
 let isFirst = true
@@ -31,7 +32,6 @@ function setPageChangeAnimation (to, from) {
   }
 }
 
-/* eslint-enable */
 //? 路由钩子
 export function routerHooks (router) {
   if (!router) throw new Error('没有发现路由原型')

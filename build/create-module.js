@@ -128,6 +128,7 @@ function syncStore (answers) {
     .then(str => fs.writeFileAsync((storePath), str, 'utf8'))
     .then(() => answers)
 }
+
 function compile(answers, fileStr) {
   return String.prototype.replace.call(fileStr, /\n*\s*\/\*.*@init<%((.|\s)*?)%>.*\*\//g, function (match, p1) {
     return (String.prototype.replace.call(p1, /\${(\w*)}/g, function (innMatch, innP1) {
