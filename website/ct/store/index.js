@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 //! 机票
 import airTicketStore from '../modules/airTicket/store.js'
-//! 酒店
-import hotelStore from '../modules/hotel/store.js'
-import mouseStore from '../modules/mouse/store.js'/* @init<%import ${TplModuleName}Store from '../modules/${TplModuleName}/store.js'%> */
+/* @init<%
+//! ${TplModuleIntroduction}
+import ${TplModuleName}Store from '../modules/${TplModuleName}/store.js'%> */
 
 Vue.use(Vuex)
 
@@ -31,12 +31,12 @@ export const store = new Vuex.Store({
       namespaced: true,
       ...airTicketStore
     },
-    //! 酒店
-    hotel: {
+    /* @init<%
+    //! ${TplModuleIntroduction}
+    ${TplModuleName}: {
       namespaced: true,
-      ...hotelStore
-    },
-    mouse: { namespaced: true, ...mouseStore },/* @init<%${TplModuleName}: { namespaced: true, ...${TplModuleName}Store },%> */
+      ...${TplModuleName}Store
+    },%> */
   }
 })
 
