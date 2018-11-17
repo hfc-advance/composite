@@ -8,7 +8,8 @@ import ${TplModuleName}White from '../modules/${TplModuleName}/store/cacheWhiteL
 /* eslint-disable */
 export const whiteList = [
   ...airTicketWhite,
-  /* @init<%...${TplModuleName}White,%>*/
+  /* @init<%
+  ...${TplModuleName}White,%>*/
 ]
 /* eslint-enable */
 

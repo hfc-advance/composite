@@ -8,7 +8,8 @@ import { entryBefore as ${TplModuleName}EntryBefore } from '../modules/${TplModu
 /* eslint-disable */
 const hooksModel = {
   'test': '',
-  /* @init<%${TplModuleName}EntryBefore,%>*/
+  /* @init<%
+  ${TplModuleName}EntryBefore,%>*/
 }
 /* eslint-enable */
 

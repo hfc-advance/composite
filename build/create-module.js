@@ -13,6 +13,7 @@ const bluebird = require('bluebird').promisifyAll(fs);
 let getRoutesPath = (answers) => path.resolve(CWD, `./website/${answers.TplProjectName}/routes/index.js`);
 let getRouterHooksPath = (answers) => path.resolve(CWD, `./website/${answers.TplProjectName}/routes/hooks.js`);
 let getStorePath = (answers) => path.resolve(CWD, `./website/${answers.TplProjectName}/store/index.js`);
+let getCacheWhiteListPath = (answers) => path.resolve(CWD, `./website/${answers.TplProjectName}/store/cacheWhiteList.js`);
 
 function launch () {
   return prompt([
@@ -93,7 +94,7 @@ function copyTem (answers) {
 
 //? 往主文件里面写东西
 function compiler (answers) {
-  return Promise.all([syncRoutes(answers), syncRouterHooks(answers), syncStore(answers)]).then(() => answers)
+  return Promise.all([syncRoutes(answers), syncRouterHooks(answers), syncStore(answers), syncWhiteListStore(answers)]).then(() => answers)
 }
 
 //? 同步路由
@@ -126,6 +127,17 @@ function syncStore (answers) {
       return compile(answers, str)
     })
     .then(str => fs.writeFileAsync((storePath), str, 'utf8'))
+    .then(() => answers)
+}
+
+//? 同步白名单状态
+function syncWhiteListStore (answers) {
+  let whiteListPath = getCacheWhiteListPath(answers);
+  bluebird.readFileAsync(whiteListPath, 'utf8')
+    .then(str => {
+      return compile(answers, str)
+    })
+    .then(str => fs.writeFileAsync((whiteListPath), str, 'utf8'))
     .then(() => answers)
 }
 
