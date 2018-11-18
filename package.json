@@ -13,7 +13,9 @@
     "////": "创建模块",
     "create:module": "node ./build/create-module.js",
     "/////": "创建路由页面",
-    "create:page": "node ./build/create-page.js"
+    "create:page": "node ./build/create-page.js",
+    "//////":"创建新项目",
+    "create:project": "node ./build/create-project.js"
   },
   "repository": {
     "type": "git",
