@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: '{{TplModuleName}}{{TplModulePage}}'
+  name: '{{TplModuleNameUpper}}{{TplModulePageUpper}}'
 }
 </script>
 

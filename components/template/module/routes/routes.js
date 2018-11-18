@@ -3,7 +3,7 @@
 //! TODO: 路由例子
 let loadPageExample = () => import(/* webpackChunkName: "{{TplModuleName}}.pageTemplate" */'components/template/page/page.vue')
 /* @init<%
-let load${TplModulePage} = () => import(${TplAnnotationStart} webpackChunkName: "${TplModuleName}.${TplModulePage}" ${TplAnnotationEnd}'../${TplModulePage}/index.vue')%> */
+let load${TplModulePageUpper} = () => import(${TplAnnotationStart} webpackChunkName: "${TplModuleName}.${TplModulePage}" ${TplAnnotationEnd}'../${TplModulePage}/index.vue')%> */
 
 /* eslint-disable */
 export const routes = [
@@ -31,8 +31,8 @@ export const routes = [
   /* @init<%
   {
     path: '/${TplModuleName}/${TplModulePage}',
-    name: '${TplModuleName}${TplModulePage}',
-    component: load${TplModulePage},
+    name: '${TplModuleNameUpper}${TplModulePageUpper}',
+    component: load${TplModulePageUpper},
     meta: {
       module: '${TplModuleName}',
       loginAuth: ${loginAuth},

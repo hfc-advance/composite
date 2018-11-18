@@ -63,7 +63,9 @@ function launch () {
       }
     ])
     .then(answers => {
-      answers = Object.assign(answers, projectAnswers, { TplAnnotationStart: '/*', TplAnnotationEnd: '*/' })
+      let TplModuleNameUpper = answers.TplModuleName.replace(/^([a-z])/, (result, match) => (match && match.toUpperCase() || ''));
+      let TplModulePageUpper = answers.TplModulePage.replace(/^([a-z])/, (result, match) => (match && match.toUpperCase() || ''));
+      answers = Object.assign(answers, projectAnswers, { TplAnnotationStart: '/*', TplAnnotationEnd: '*/' }, { TplModuleNameUpper,  TplModulePageUpper })
       spinner.start();
       copyTem(answers)
         .then(() => {
