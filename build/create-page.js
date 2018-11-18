@@ -63,7 +63,7 @@ function launch () {
       }
     ])
     .then(answers => {
-      answers = Object.assign(answers, projectAnswers)
+      answers = Object.assign(answers, projectAnswers, { TplAnnotationStart: '/*', TplAnnotationEnd: '*/' })
       spinner.start();
       copyTem(answers)
         .then(() => {

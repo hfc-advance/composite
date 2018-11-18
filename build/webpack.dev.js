@@ -19,7 +19,7 @@ const devWebpackConfig = {
     path: config.assetsRoot,
     publicPath: config.assetsPublicPath,
     filename: '[name]/static/js/[name].js',
-    chunkFilename: '[name].js',
+    chunkFilename: '[name][hash:6].js',
   },
   module: {
     rules: styleLoaders({ sourceMap: config.cssSourceMap, usePostCSS: true }).concat([

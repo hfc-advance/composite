@@ -3,7 +3,7 @@
 //! TODO: 路由例子
 let loadPageExample = () => import(/* webpackChunkName: "{{TplModuleName}}.pageTemplate" */'components/template/page/page.vue')
 /* @init<%
-let load${TplModulePage} = () => import('../${TplModulePage}/index.vue')%> */
+let load${TplModulePage} = () => import(${TplAnnotationStart} webpackChunkName: "${TplModuleName}.${TplModulePage}" ${TplAnnotationEnd}'../${TplModulePage}/index.vue')%> */
 
 /* eslint-disable */
 export const routes = [

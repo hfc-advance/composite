@@ -1,9 +1,9 @@
 //? 机票模块路由
 
 //! TODO: 路由例子
-let loadPageExample = () => import(/* webpackChunkName: "airTicket.pageTemplate" */'components/template/page/page.vue')
+let loadPageExample = () => import(/* webpackChunkName: "example" */'components/template/page/page.vue')
 /* @init<%
-let load${TplModulePage} = () => import('../${TplModulePage}/index.vue')%> */
+let load${TplModulePage} = () => import(${TplAnnotationStart} webpackChunkName: "${TplModuleName}.${TplModulePage}" ${TplAnnotationEnd}'../${TplModulePage}/index.vue')%> */
 
 /* eslint-disable */
 export const routes = [
@@ -30,26 +30,13 @@ export const routes = [
       preload () {}
     }
   },
-  {
-    path: '/airTicket/jlkddf',
-    name: '',
-    component: loadairTicket,
-    meta: {
-      module: 'airTicketjlkddf',
-      loginAuth: true,
-      bgClass: '',
-      keepAlive: true,
-      title: '供电局法律',
-      preload () {}
-    }
-  },
   /* @init<%
   {
     path: '/${TplModuleName}/${TplModulePage}',
     name: '${TplModuleName}${TplModulePage}',
-    component: load${TplModuleName},
+    component: load${TplModulePage},
     meta: {
-      module: '${TplModuleName}${TplModulePage}',
+      module: '${TplModuleName}',
       loginAuth: ${loginAuth},
       bgClass: '',
       keepAlive: ${keepAlive},
