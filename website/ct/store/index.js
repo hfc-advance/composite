@@ -12,13 +12,19 @@ Vue.use(Vuex)
 
 const state = {
   //! 页面切换动画名称
-  pageChangeAnimation: ''
+  pageChangeAnimation: '',
+  //! 需要缓存的组件名称
+  keepAliveComponents: []
 }
 
 const mutations = {
   //! 设置页面切换动画名称
   setPageChangeAnimation (state, name = '') {
     state.pageChangeAnimation = name
+  },
+  //! 设置缓存页面数据
+  setKeepAliveComponents (state, aliveLists = []) {
+    state.keepAliveComponents = aliveLists
   }
 }
 
