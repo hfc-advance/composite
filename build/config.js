@@ -11,7 +11,7 @@ const config = {
     //? css映射
     cssSourceMap: true,
     //? 映射模式
-    devtool: 'cheap-module-eval-source-map',
+    devtool: 'source-map',
     //? 定义系统变量
     defineEnv: {
       NODE_ENV: '"development"'

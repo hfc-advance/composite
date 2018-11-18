@@ -9,6 +9,8 @@ const ora = require('ora');
 const spinner = ora(`模块初始化中`);
 const bluebird = require('bluebird').promisifyAll(fs);
 
+const utils = require('./utils.js');
+
 //? path
 let getRoutesPath = (answers) => path.resolve(CWD, `./website/${answers.TplProjectName}/routes/index.js`);
 let getRouterHooksPath = (answers) => path.resolve(CWD, `./website/${answers.TplProjectName}/routes/hooks.js`);
@@ -16,60 +18,67 @@ let getStorePath = (answers) => path.resolve(CWD, `./website/${answers.TplProjec
 let getCacheWhiteListPath = (answers) => path.resolve(CWD, `./website/${answers.TplProjectName}/store/cacheWhiteList.js`);
 
 function launch () {
-  return prompt([
+  let projectChoices = Object.keys(utils.getEntries('./website'));
+  prompt([
     {
-      type: 'input',
+      type: 'list',
       name: 'TplProjectName',
-      message: '请输入要创建的模块属于哪一个项目:',
-      validate: function (str) {
-        return str && str.length > 0
-      }
-    },
-    {
-      type: 'input',
-      name: 'TplModuleName',
-      message: '请输入要创建的模块名称(英文):',
-      validate: function (str) {
-        return str && str.length > 0
-      }
-    },
-    {
-      type: 'input',
-      name: 'TplModuleIntroduction',
-      message: '请简单的介绍下要创建的模块（Introduction）:',
+      message: '请选择要创建的页面属于哪个项目?',
+      choices: projectChoices,
       validate: function (str) {
         return str && str.length > 0
       }
     }
   ])
-    .then(answers => {
-      spinner.start();
-      Promise.all([fileDirectoryExists(answers.TplProjectName), fileDirectoryExists(`${answers.TplProjectName}/modules/${answers.TplModuleName}`)])
-        .then(values => {
-          let projectExists = values[0];
-          let moduleExists = values[1]
-          if (!projectExists) {
-            throw new Error(`请确定${answers.TplProjectName}项目是否存在`)
+    .then(projectAnswers => {
+      prompt([
+        {
+          type: 'input',
+          name: 'TplModuleName',
+          message: '请输入要创建的模块名称(英文):',
+          validate: function (str) {
+            return str && str.length > 0
           }
-          if (moduleExists) {
-            throw new Error(`${answers.TplProjectName}项目下的已经存在${answers.TplModuleName}模块，请重新命名模块名称`)
+        },
+        {
+          type: 'input',
+          name: 'TplModuleIntroduction',
+          message: '请简单的介绍下要创建的模块（Introduction）:',
+          validate: function (str) {
+            return str && str.length > 0
           }
-          copyTem(answers)
-            .then(() => {
-              compiler(answers)
+        }
+      ])
+        .then(answers => {
+          answers = Object.assign(answers, projectAnswers);
+          spinner.start();
+          Promise.all([fileDirectoryExists(answers.TplProjectName), fileDirectoryExists(`${answers.TplProjectName}/modules/${answers.TplModuleName}`)])
+            .then(values => {
+              let projectExists = values[0];
+              let moduleExists = values[1]
+              if (!projectExists) {
+                throw new Error(`请确定${answers.TplProjectName}项目是否存在`)
+              }
+              if (moduleExists) {
+                throw new Error(`${answers.TplProjectName}项目下的已经存在${answers.TplModuleName}模块，请重新命名模块名称`)
+              }
+              copyTem(answers)
                 .then(() => {
-                  spinner.succeed(`${answers.TplProjectName}项目下的${answers.TplModuleName}模块构建完成`);
+                  compiler(answers)
+                    .then(() => {
+                      spinner.succeed(`${answers.TplProjectName}项目下的${answers.TplModuleName}模块构建完成`);
+                    })
+                    .catch((error) => {
+                      spinner.fail(error);
+                    })
                 })
-                .catch((error) => {
+                .catch(error => {
                   spinner.fail(error);
                 })
             })
             .catch(error => {
               spinner.fail(error);
             })
-        })
-        .catch(error => {
-          spinner.fail(error);
         })
     })
     .catch(error => {
