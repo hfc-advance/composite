@@ -2,6 +2,10 @@
 
 //! TODO: 路由例子
 let loadPageExample = () => import(/* webpackChunkName: "{{TplModuleName}}.pageTemplate" */'components/template/page/page.vue')
+/* @init<%
+let load${TplModulePage} = () => import('../${TplModulePage}/index.vue')%> */
+
+/* eslint-disable */
 export const routes = [
   {
     //! 模块/组件名字
@@ -23,7 +27,22 @@ export const routes = [
       //? 预加载方法，可以预加载后续页面，这个方法会在页面进来之后，空闲的时间去执行，不干扰当前页面
       preload () {}
     }
-  }
+  },
+  /* @init<%
+  {
+    path: '/${TplModuleName}/${TplModulePage}',
+    name: '${TplModuleName}${TplModulePage}',
+    component: load${TplModulePage},
+    meta: {
+      module: '${TplModuleName}',
+      loginAuth: ${loginAuth},
+      bgClass: '',
+      keepAlive: ${keepAlive},
+      title: '${TplModulePageTitle}',
+      preload () {}
+    }
+  },%> */
 ]
+/* eslint-enable */
 
 export default routes

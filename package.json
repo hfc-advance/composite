@@ -11,7 +11,9 @@
     "///": "验证commit信息",
     "commitmsg": "validate-commit-msg",
     "////": "创建模块",
-    "create:module": "node ./build/create-module.js"
+    "create:module": "node ./build/create-module.js",
+    "/////": "创建路由页面",
+    "create:page": "node ./build/create-page.js"
   },
   "repository": {
     "type": "git",

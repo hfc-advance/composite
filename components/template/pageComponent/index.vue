@@ -1,14 +1,12 @@
 <template>
-  <div class="contain">测试</div>
+  <div></div>
 </template>
 
 <script>
 export default {
-  name: 'test'
+  name: '{{TplModuleName}}{{TplModulePage}}'
 }
 </script>
 
 <style lang="stylus" scoped>
-.contain
-  background-color blue
 </style>
