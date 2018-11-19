@@ -14,6 +14,17 @@ if (router && router.options && router.options.routes) {
   store.commit('setKeepAliveComponents', [...(new Set(keepAliveComponents))])
 }
 
+//! 注册全局icon组件
+Vue.component('icon', {
+  template: `<svg><use :xlink:href="url"></use></svg>`,
+  props: {
+    url: {
+      required: true,
+      type: String
+    }
+  }
+})
+
 window.$vue = new Vue({
   el: '#app',
   router,
