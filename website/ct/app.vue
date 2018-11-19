@@ -15,9 +15,6 @@ export default {
   computed: {
     //! 路由切换动画名称
     ...mapState(['pageChangeAnimation'])
-  },
-  created () {
-    this.$store.commit('setPageChangeAnimation', 'slide-left')
   }
 }
 </script>
