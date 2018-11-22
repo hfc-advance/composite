@@ -50,7 +50,8 @@ function launch () {
         }
       ])
         .then(answers => {
-          answers = Object.assign(answers, projectAnswers);
+          let TplModuleNameUpper = answers.TplModuleName.replace(/^([a-z])/, (result, match) => (match && match.toUpperCase() || ''));
+          answers = Object.assign(answers, projectAnswers, { TplModuleNameUpper });
           spinner.start();
           Promise.all([fileDirectoryExists(answers.TplProjectName), fileDirectoryExists(`${answers.TplProjectName}/modules/${answers.TplModuleName}`)])
             .then(values => {
