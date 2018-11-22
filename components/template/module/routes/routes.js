@@ -11,7 +11,7 @@ export const routes = [
     //! 模块/组件名字
     path: '/{{TplModuleName}}/pageTemplate',
     //! 如果使用keepAlive这个name必须和组件内部的name相同，要不然页面缓存无效
-    name: 'pageTemplate',
+    name: 'page{{TplModuleNameUpper}}Template',
     //! 路由懒加载
     component: loadPageExample,
     meta: {
