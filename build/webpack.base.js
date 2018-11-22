@@ -6,7 +6,9 @@ let resolve = dir => path.resolve(__dirname, dir);
 let assetsArray = [resolve('../website'), resolve('../components')];
 let relative = (dir) => {
   let tmp = path.dirname(path.relative(path.resolve(__dirname, '../website'), dir));
-  return tmp.split(path.sep)[0];
+  let relativeStr = tmp.split(path.sep)[0]
+  //? TODO:所有项目公用资源有可能出问题
+  return /^../.test(relativeStr) ? '.' : relativeStr;
 }
 
 var entry = utils.getEntries('./website');
