@@ -4,6 +4,7 @@ import store from './store/index.js'
 import App from './app.vue'
 //! 导入公共样式
 import 'components/styles/base.styl'
+import { get } from 'components/tools/network.js'
 
 //! 保存需要缓存的路由组件
 if (router && router.options && router.options.routes) {
@@ -13,6 +14,11 @@ if (router && router.options && router.options.routes) {
   })
   store.commit('setKeepAliveComponents', [...(new Set(keepAliveComponents))])
 }
+
+//! 定义全局get请求
+Object.defineProperty(Vue.prototype, '$get', {
+  value: get
+})
 
 window.$vue = new Vue({
   el: '#app',

@@ -6,7 +6,8 @@ let resolve = dir => path.resolve(__dirname, dir);
 let assetsArray = [resolve('../website'), resolve('../components')];
 let relative = (dir) => {
   let tmp = path.dirname(path.relative(path.resolve(__dirname, '../website'), dir));
-  return tmp.split(path.sep)[0];
+  let relativeStr = tmp.split(path.sep)[0]
+  return /^../.test(relativeStr) ? '.' : relativeStr;
 }
 
 var entry = utils.getEntries('./website');
@@ -62,7 +63,9 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 1000,
-          name: file => relative(file) + '/static/img/[name].[hash:7].[ext]'
+          name: file => {
+            return relative(file) + '/static/img/[name].[hash:7].[ext]'
+          }
         }
       }, {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,

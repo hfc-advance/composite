@@ -6,6 +6,7 @@ const chalk = require('chalk');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const hotMiddleware = require('webpack-hot-middleware');
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+const proxy = require('http-proxy-middleware');
 const utils = require('./utils.js');
 const webpack = require('webpack');
 const webpackConfig = require('./webpack.dev.js');
@@ -41,6 +42,14 @@ Promise.all(needPromises)
       : undefined
     }))
     const compiler = webpack(webpackConfig);
+    //? 设置代理
+    app.use('/m', proxy({
+      target: 'http://ct.ctrip.fat4.qa.nt.ctripcorp.com',
+      changeOrigin: true,
+      onProxyReq () {
+        console.log(1)
+      }
+    }))
 
     app.use(webpackDevMiddleware(compiler, {
       publicPath: config.assetsPublicPath,

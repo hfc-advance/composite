@@ -1,5 +1,7 @@
 import { isFunction } from 'components/tools/utils.js'
 import store from '../store/index.js'
+//! common模块钩子
+import { entryBefore as commonEntryBefore } from '../modules/common/routes/routerHooks.js'
 /* @init<%
 //! ${TplModuleName}模块钩子
 import { entryBefore as ${TplModuleName}EntryBefore } from '../modules/${TplModuleName}/routes/routerHooks.js'%> */
@@ -8,6 +10,7 @@ import { entryBefore as ${TplModuleName}EntryBefore } from '../modules/${TplModu
 /* eslint-disable */
 const hooksModel = {
   'test': '',
+  commonEntryBefore,
   /* @init<%
   ${TplModuleName}EntryBefore,%>*/
 }
@@ -63,7 +66,10 @@ export function routerHooks (router) {
 
   //! 页面进来之后
   router.afterEach((to, from) => {
-    let { meta: { preload } = {} } = to || {}
+    let { meta: { preload, bgClass = '' } = {} } = to || {}
+    //? 设置背景色
+    document.body.className = bgClass
+    document.documentElement.className = bgClass
     //? 预加载数据
     if (isFunction(preload)) {
       let timer = setTimeout(() => {

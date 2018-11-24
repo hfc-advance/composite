@@ -4,6 +4,8 @@ import createStorePlugin from 'components/tools/storePlugin.js'
 import whiteList from './cacheWhiteList.js'
 //! 机票
 import airTicketStore from '../modules/airTicket/store/store.js'
+//! 公共模块
+import commonStore from '../modules/common/store/store.js'
 /* @init<%
 //! ${TplModuleIntroduction}
 import ${TplModuleName}Store from '../modules/${TplModuleName}/store/store.js'%> */
@@ -47,6 +49,11 @@ export const store = new Vuex.Store({
     airTicket: {
       namespaced: true,
       ...airTicketStore
+    },
+    //! 公共模块
+    common: {
+      namespaced: true,
+      ...commonStore
     },
     /* @init<%
     //! ${TplModuleIntroduction}
