@@ -9,7 +9,6 @@ const WebpackBar = require('webpackbar');
 const webpackMerge = require('webpack-merge');
 const webpackBaseConfig = require('./webpack.base.js');
 const utils = require('./utils.js');
-const SpriteLoaderPlugin = require('svg-sprite-loader/plugin.js');
 
 const devWebpackConfig = {
   mode: 'development',
@@ -22,16 +21,7 @@ const devWebpackConfig = {
     chunkFilename: '[name][hash:6].js',
   },
   module: {
-    rules: styleLoaders({ sourceMap: config.cssSourceMap, usePostCSS: true }).concat([
-      {
-        test: /\.svg$/,
-        loader: 'svg-sprite-loader',
-        options: {
-          extract: true,
-          spriteFilename: svgPath => `sprite${svgPath.substr(-4)}`
-        }
-      }
-    ])
+    rules: styleLoaders({ sourceMap: config.cssSourceMap, usePostCSS: true })
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.devtool,
@@ -39,7 +29,6 @@ const devWebpackConfig = {
     new webpack.DefinePlugin({
       'process.env': config.defineEnv
     }),
-    new SpriteLoaderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
     new webpack.NoEmitOnErrorsPlugin(),

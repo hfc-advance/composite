@@ -2,6 +2,8 @@
 const path = require('path');
 const config = require('./config.js');
 const utils = require('./utils.js');
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin.js');
+
 let resolve = dir => path.resolve(__dirname, dir);
 let assetsArray = [resolve('../website'), resolve('../components')];
 let relative = (dir) => {
@@ -67,6 +69,14 @@ module.exports = {
           name: file => relative(file) + '/static/img/[name].[hash:7].[ext]'
         }
       }, {
+        test: /\.svg$/,
+        loader: 'svg-sprite-loader',
+        options: {
+          extract: true,
+          spriteFilename: svgPath => `sprite${svgPath.substr(-4)}`
+        }
+      },
+      {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
         loader: 'url-loader',
         options: {
@@ -83,6 +93,9 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new SpriteLoaderPlugin()
+  ],
   node: {
     // prevent webpack from injecting useless setImmediate polyfill because Vue
     // source contains it (although only uses it if it's native).
