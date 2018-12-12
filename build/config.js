@@ -24,7 +24,7 @@ const config = {
     //? 资源目录
     assetsRoot: path.resolve(__dirname, '../dist'),
     //? 静态资源路径
-    assetsPublicPath: '/',
+    assetsPublicPath: process.env.uploadAlioss ? '//shadow.hfcui.com/assets/' : '/',
     //? css映射
     cssSourceMap: true,
     //? 定义系统变量
@@ -32,7 +32,14 @@ const config = {
       NODE_ENV: '"production"'
     },
     //? 是否显示编译错误通知
-    notifyOnErrors: true
+    notifyOnErrors: true,
+    //? Alioss
+    ossOptions: {
+      accessKeyId: 'LTAIc55pn1DsRBue',
+      accessKeySecret: 'HjSUVA7b0JVBIkBRDpfT7vMmpFaCTG',
+      region: 'oss-cn-beijing',
+      bucket: 'mp1'
+    }
   },
   //! webpack stats的配置
   stats: {

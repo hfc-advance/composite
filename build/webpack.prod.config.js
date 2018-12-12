@@ -119,20 +119,20 @@ const webpackConfig = {
   ]
 }
 
-// Upload static to ali oss
-/* if (config.build.uploadToAliOSS) {
+//? Upload static to ali oss
+if (process.env.uploadAlioss) {
   const AliossWebpackPlugin = require('alioss-webpack-plugin')
 
   webpackConfig.plugins.push(
     new AliossWebpackPlugin({
-      ossOptions: config.build.ossOptions,
+      ossOptions: config.prod.ossOptions,
       prefix: 'assets/',
       exclude: /.*\.html$/,
       enableLog: true,
       deleteMode: false
     })
   )
-} */
+}
 
 //? 开启gzip压缩
 if (process.env.gzip) {
